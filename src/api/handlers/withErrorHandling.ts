@@ -14,7 +14,7 @@ export const withErrorHandling = (
         try {
             await callback(req, res, next);
         } catch (error) {
-            errorHandler(error, req, res, next);
+            errorHandler(error, req, res);
         }
     };
 };

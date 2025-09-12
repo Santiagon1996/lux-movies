@@ -1,10 +1,15 @@
+
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../utils/apiClient";
+import type { Movie } from "../types/Movie";
+interface MoviesByCategoryResponse {
+    result: Movie[];
+}
 
-// Películas por categoría
 export function useMoviesByCategory(category: string) {
-    return useQuery({
+    return useQuery<MoviesByCategoryResponse, Error, Movie[]>({
         queryKey: ["movies", category],
-        queryFn: () => apiClient(`/api/category/${category}`),
+        queryFn: () => apiClient<MoviesByCategoryResponse>(`/api/category/${category}`),
+        select: (data) => data.result,
     });
 }

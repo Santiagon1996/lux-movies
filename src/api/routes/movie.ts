@@ -1,11 +1,13 @@
+
 import { Router } from "express";
 import { logic } from "../logic/index";
-import { createRouteHandler } from "../handlers/index"
+import { createRouteHandler } from "../handlers/index";
 
-const { fetchMoviesByCategory, fetchMovieById } = logic;
+const { fetchMoviesByCategory, fetchMovieById, fetchAllCategory } = logic;
 
 export const movieRouter = Router();
 
 // Rutas 
 movieRouter.get("/category/:category", createRouteHandler(fetchMoviesByCategory, "category"));
 movieRouter.get("/id/:id", createRouteHandler(fetchMovieById, "id"));
+movieRouter.get("/categories", createRouteHandler(fetchAllCategory, "categories"));

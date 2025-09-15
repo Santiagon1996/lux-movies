@@ -10,14 +10,14 @@ interface MoviesListProps {
 const MovieList: React.FC<MoviesListProps> = ({ category }) => {
     const { data, isLoading, isError, error } = useMoviesByCategory(category);
 
-    // Estilos CSS para el carrusel
-    const carouselStyles: React.CSSProperties = {
-        display: 'flex',
-        overflowX: 'scroll',
-        scrollSnapType: 'x mandatory',
-        WebkitOverflowScrolling: 'touch',
-        gap: '1rem', // Espacio entre las tarjetas
-        padding: '1rem',
+    const carouselRef = React.useRef<HTMLDivElement>(null);
+
+    const scrollCarousel = (direction: 'left' | 'right') => {
+        const el = carouselRef.current;
+        if (el) {
+            const scrollAmount = el.offsetWidth * 0.8;
+            el.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+        }
     };
 
 
@@ -25,28 +25,38 @@ const MovieList: React.FC<MoviesListProps> = ({ category }) => {
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-full text-lg">
-                Cargando películas...
-            </div>
+                Loading movies...            </div>
         );
     }
 
     if (isError) {
         return (
             <div className="text-red-500 text-center text-lg">
-                Error al cargar las películas: {error.message}
+                Error loading movies: {error.message}
             </div>
         );
     }
 
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4 capitalize">
-                {category.replace('_', ' ')}
-            </h2>
-            <div style={carouselStyles}>
+        <div className="p-4" style={{ position: 'relative' }}>
+            <button
+                className="carousel-nav-btn left"
+                onClick={() => scrollCarousel('left')}
+                aria-label="Desplazar a la izquierda"
+            >
+                &#8592;
+            </button>
+            <button
+                className="carousel-nav-btn right"
+                onClick={() => scrollCarousel('right')}
+                aria-label="Desplazar a la derecha"
+            >
+                &#8594;
+            </button>
+            <div ref={carouselRef} className="carousel-container">
                 {data?.map((movie: Movie) => (
-                    <div key={movie.id}>
-                        <MovieCard movie={movie} />
+                    <div key={movie.id} className="carousel-card">
+                        <MovieCard movie={movie} category={category} />
                     </div>
                 ))}
             </div>

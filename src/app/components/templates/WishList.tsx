@@ -16,29 +16,29 @@ const WishList: React.FC = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="movie-detail-container">
-            <h1 className="movie-detail-title">Tu Wishlist</h1>
+        <div className="WishList-container">
+            <h1 className="WishList-title">Favorites</h1>
             {movies.length === 0 ? (
-                <p style={{ color: '#ccc', textAlign: 'center' }}>No tienes películas en tu lista de deseos.</p>
+                <p className="WishList-empty">You have no movies in your favorites list.</p>
             ) : (
                 <>
                     <ButtonClearWishList
                         onClick={() => {
-                            if (window.confirm('¿Seguro que quieres vaciar toda la wishlist?')) {
+                            if (window.confirm('Are you sure you want to clear your favorites list?')) {
                                 dispatch(clearWishList());
                             }
                         }}
                     />
-                    <ul className="movie-detail-grid">
+                    <ul className="WishList-grid">
                         {movies
                             .slice()
                             .sort((a, b) => a.title.localeCompare(b.title))
                             .map((movie: Movie) => (
-                                <li key={movie.id} className="movie-detail-card">
-                                    <MovieCard movie={movie} />
+                                <li key={movie.id} className="WishList-card">
+                                    <MovieCard movie={movie} category="wishlist" />
                                     <ButtonRemoveWish
                                         onClick={() => {
-                                            if (window.confirm(`¿Seguro que quieres quitar "${movie.title}" de la wishlist?`)) {
+                                            if (window.confirm(`¿Are you sure you want to remove "${movie.title}" from your favorites list?`)) {
                                                 dispatch(removeFromWishList(movie.id));
                                             }
                                         }}

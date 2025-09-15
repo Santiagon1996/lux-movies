@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider, hydrate } from "@tanstack/react-query
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import './index.css';
 import AppWrapper from './AppWrapper';
 import dotenv from 'dotenv';
 

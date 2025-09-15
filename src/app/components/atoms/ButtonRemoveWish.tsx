@@ -19,7 +19,7 @@ const ButtonRemoveWish: React.FC<ButtonRemoveWishProps> = ({ onClick }) => (
             transition: "background 0.2s"
         }}
     >
-        Quitar
+        Remove
     </button>
 );
 

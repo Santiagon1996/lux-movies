@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <>
       <Header isActive={isHome} />
-      <main className="min-h-screen bg-gray-100 p-8">
+      <main className="app-main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movie/:movieId" element={<MovieDetail />} />

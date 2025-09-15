@@ -7,13 +7,14 @@ import type { RootState } from "../../store/store";
 
 interface ButtonWishProps {
     movie: Movie;
+    style?: React.CSSProperties;
 }
 
-const ButtonWish: React.FC<ButtonWishProps> = ({ movie }) => {
+const ButtonWish: React.FC<ButtonWishProps> = ({ movie, style }) => {
     const dispatch = useDispatch();
     const isWished = useSelector((state: RootState) =>
-        state.wishlist && Array.isArray(state.wishlist.movies)
-            ? state.wishlist.movies.some((m) => m.id === movie.id)
+        state.wishList && Array.isArray(state.wishList.movies)
+            ? state.wishList.movies.some((m) => m.id === movie.id)
             : false
     );
 
@@ -35,16 +36,17 @@ const ButtonWish: React.FC<ButtonWishProps> = ({ movie }) => {
                 style={{
                     padding: "0.75rem 1.5rem",
                     borderRadius: 8,
-                    background: isWished ? "#ff9800" : "#222",
-                    color: isWished ? "#222" : "#fff",
+                    background: isWished ? "#ff9800" : (style?.background || "#222"),
+                    color: isWished ? "#222" : (style?.color || "#fff"),
                     fontWeight: "bold",
-                    border: "2px solid #ff9800",
+                    border: style?.border || "2px solid #ff9800",
                     cursor: isWished ? "not-allowed" : "pointer",
                     boxShadow: isWished ? "0 2px 8px #ff980055" : "none",
-                    transition: "all 0.2s"
+                    transition: "all 0.2s",
+                    ...style
                 }}
             >
-                {isWished ? "En Wishlist" : "Agregar a Wishlist"}
+                {isWished ? "On Wishlist" : "Add to Favorites"}
             </button>
             {showMsg && (
                 <span
@@ -62,7 +64,7 @@ const ButtonWish: React.FC<ButtonWishProps> = ({ movie }) => {
                         boxShadow: "0 2px 8px #00000033"
                     }}
                 >
-                    ¡Agregada a la Wishlist!
+                    ¡Added to Favorites!
                 </span>
             )}
         </div>

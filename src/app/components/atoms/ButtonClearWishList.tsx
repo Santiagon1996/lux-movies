@@ -19,7 +19,7 @@ const ButtonClearWishList: React.FC<ButtonClearWishListProps> = ({ onClick }) =>
             transition: "background 0.2s"
         }}
     >
-        Limpiar Wishlist
+        Clear
     </button>
 );
 

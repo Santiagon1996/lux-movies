@@ -3,4 +3,4 @@ import { movieRouter } from '../../../api/routes/movie';
 
 export const apiRoutes = Router();
 
-apiRoutes.use("/api", movieRouter);
+apiRoutes.use(movieRouter);

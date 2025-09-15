@@ -13,7 +13,7 @@ async function createServer() {
     const isProd = process.env.NODE_ENV === 'production';
 
     app.use(requestLogger);
-    app.use(apiRoutes);
+    app.use("/api", apiRoutes);//sumo api 
 
     if (isProd) {
         app.use(express.static("dist/client"));

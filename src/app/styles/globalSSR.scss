@@ -1,0 +1,503 @@
+/* Mixins */
+@mixin box-shadow($type: 'heavy') {
+  @if $type == 'light' {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  } @else if $type == 'medium' {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  } @else if $type == 'heavy' {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  } @else if $type == 'very-heavy' {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  } @else if $type == 'nav-btn' {
+    box-shadow: 0 2px 8px #0002;
+  } @else if $type == 'menu' {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+}
+
+@mixin container-styles {
+  background: $color-dark-primary;
+  border-radius: $border-radius-l;
+  color: $color-light;
+  padding: $spacing-xl;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  max-width: 900px;
+  margin: $spacing-xl auto;
+  
+  @media (max-width: 900px) {
+    padding: $spacing-s;
+    border-radius: $border-radius-s;
+  }
+  
+  @media (max-width: 600px) {
+    padding: $spacing-xs;
+    border-radius: $border-radius-xs;
+  }
+}
+
+@mixin card-styles {
+  background: $color-dark-tertiary;
+  border-radius: $border-radius-l;
+  @include box-shadow('heavy');
+  
+  @media (max-width: 900px) {
+    border-radius: $border-radius-s;
+  }
+  
+  @media (max-width: 600px) {
+    border-radius: $border-radius-xs;
+  }
+}
+
+/* Paleta de colores */
+$color-dark-primary: #181818;
+$color-dark-secondary: #222222;
+$color-dark-tertiary: #232323;
+$color-dark-highlight: #232946;
+$color-light: #fff;
+$color-orange: #ff9800;
+$color-yellow: #ffc107;
+$color-inactive: #ccc;
+
+/* Espaciado */
+$spacing-xxs: 0.25rem;
+$spacing-xs: 0.5rem;
+$spacing-s: 1rem;
+$spacing-m: 1.2rem;
+$spacing-l: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-tablet-s: 0.7rem; 
+
+/* Tamaños de fuente */
+$font-size-xxs: 0.85rem;
+$font-size-xs: 0.95rem;
+$font-size-s: 1.05rem;
+$font-size-m: 1.5rem;
+$font-size-l: 1.7rem;
+$font-size-xl: 2rem;
+$font-size-xxl: 2.2rem;
+$font-size-icon: 32px;
+$font-size-mobile-title: 1.1rem;
+
+/* Bordes y radios */
+$border-radius-xs: 0.5rem;
+$border-radius-s: 0.7rem;
+$border-radius-m: 8px;
+$border-radius-l: 1rem;
+$border-radius-xl: 12px;
+$border-radius-circle: 50%;
+
+/* Sombras */
+$box-shadow-light: 0 1px 6px rgba(0, 0, 0, 0.1);
+$box-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.2);
+$box-shadow-heavy: 0 2px 12px rgba(0, 0, 0, 0.15);
+$box-shadow-very-heavy: 0 4px 24px rgba(0, 0, 0, 0.25);
+$box-shadow-nav-btn: 0 2px 8px #0002;
+$box-shadow-menu: 0 2px 8px rgba(0, 0, 0, 0.02);
+
+
+/* Base styles */
+body {
+  margin: 0;
+  background: $color-dark-secondary;
+}
+
+/* Header */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-s $spacing-xl;
+  background: $color-dark-primary;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+    .hamburger-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-right: $spacing-s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .menu-categories {
+      position: absolute;
+      top: 3.5rem;
+      left: 0;
+      background: $color-dark-primary;
+      @include box-shadow('menu');
+      border-radius: $border-radius-m;
+      z-index: 10;
+      padding: $spacing-s;
+      
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      a {
+        display: block;
+        color: $color-light;
+        padding: $spacing-xs $spacing-s;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-bottom: $spacing-xs;
+        background: transparent;
+        transition: background 0.2s;
+        
+        &:hover {
+          background: $color-dark-highlight;
+        }
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+    
+    .header-title {
+      font-size: $font-size-xl;
+      font-weight: bold;
+      color: $color-light;
+      text-decoration: none;
+    }
+    
+    .header-wishlist {
+      background: $color-orange;
+      color: $color-dark-secondary;
+      padding: $spacing-xs 1.2rem;
+      border-radius: $border-radius-m;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.2s;
+      
+      &:hover {
+        background: $color-yellow;
+      }
+    }
+  }
+}
+
+.material-symbols-outlined {
+  font-size: $font-size-icon;
+  color: $color-light;
+}
+
+/* Carousel */
+.carousel-container {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: $spacing-l;
+  padding-bottom: $spacing-s;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .carousel-card {
+    min-width: 220px;
+    max-width: 260px;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+  }
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: $color-dark-highlight;
+  color: $color-light;
+  border: none;
+  border-radius: $border-radius-circle;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-l;
+  @include box-shadow('nav-btn');
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0.85;
+  transition: background 0.2s, opacity 0.2s;
+  
+  &:hover {
+    background: $color-orange;
+    color: $color-dark-highlight;
+    opacity: 1;
+  }
+}
+  
+.carousel-nav-btn.left {
+  left: $spacing-xs;
+}
+
+.carousel-nav-btn.right {
+  right: $spacing-xs;
+}
+
+@media (max-width: 900px) {
+  .carousel-card {
+    min-width: 160px;
+    max-width: 180px;
+  }
+  .carousel-container {
+    gap: $spacing-s;
+    padding-bottom: $spacing-xs;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-card {
+    min-width: 120px;
+    max-width: 140px;
+  }
+  .carousel-container {
+    gap: $spacing-xs;
+    padding-bottom: $spacing-xxs;
+  }
+}
+
+/* Home */
+.movie-detail-container {
+  padding: $spacing-xl;
+  background: $color-dark-primary;
+  border-radius: $border-radius-xl;
+  @include box-shadow('medium');
+  color: $color-light;
+}
+
+.movie-detail-title {
+  font-size: $font-size-xl;
+  font-weight: bold;
+  margin-bottom: $spacing-s;
+  color: $color-orange;
+}
+
+/* Movie Detail */
+.MovieDetail-container {
+  @include container-styles;
+  
+  .MovieDetail-title {
+    font-size: $font-size-xxl;
+    font-weight: bold;
+    margin-bottom: $spacing-m;
+    color: $color-orange;
+
+    @media (max-width: 900px) {
+      font-size: $font-size-m;
+    }
+    
+    @media (max-width: 600px) {
+      font-size: $font-size-mobile-title;
+    }
+  }
+
+  .MovieDetail-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: $spacing-xl;
+    align-items: flex-start;
+    margin-bottom: $spacing-l;
+    
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: $spacing-s;
+    }
+  }
+  
+  .MovieDetail-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-m;
+  }
+
+  .MovieDetail-info {
+    font-size: $font-size-s;
+    color: $color-yellow;
+    background: $color-dark-tertiary;
+    border-radius: $border-radius-s;
+    padding: $spacing-s $spacing-m;
+    margin-top: $spacing-m;
+    @include box-shadow('light');
+    
+    @media (max-width: 900px) {
+      font-size: $font-size-xs;
+      padding: $spacing-tablet-s;
+    }
+    
+    @media (max-width: 600px) {
+      font-size: $font-size-xxs;
+      padding: $spacing-xs 0.7rem;
+    }
+  }
+  
+  .MovieDetail-image {
+    width: 100%;
+    max-width: 320px;
+    border-radius: $border-radius-l;
+    object-fit: cover;
+    @include box-shadow('heavy');
+    
+    @media (max-width: 900px) {
+      max-width: 220px;
+      border-radius: $border-radius-s;
+    }
+    
+    @media (max-width: 600px) {
+      max-width: 140px;
+      border-radius: $border-radius-xs;
+    }
+  }
+}
+
+/* App.css */
+.app-main {
+  flex: 1;
+  max-width: auto;
+  padding-top: $spacing-s;
+  width: 100%;
+}
+
+/* Movie Card */
+.movie-detail-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  
+  @include card-styles;
+  
+  &:hover {
+    transform: scale(1.04);
+    @include box-shadow('very-heavy');
+    
+    .movie-detail-poster {
+      filter: blur(2px) brightness(0.7);
+    }
+    
+    .movie-detail-info {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+  
+  .movie-detail-poster {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: $border-radius-l;
+    object-fit: cover;
+    transition: filter 0.3s;
+    
+    @media (max-width: 900px) {
+      border-radius: $border-radius-s;
+    }
+    
+    @media (max-width: 600px) {
+      border-radius: $border-radius-xs;
+    }
+  }
+  
+  .movie-detail-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: $spacing-s;
+    background: rgba(24, 24, 24, 0.85);
+    color: $color-light;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    min-height: 40%;
+    
+    @media (max-width: 900px) {
+      padding: $spacing-tablet-s;
+      font-size: $font-size-xs;
+    }
+    
+    @media (max-width: 600px) {
+      padding: $spacing-xs;
+      font-size: $font-size-xxs;
+    }
+  }
+}
+
+/* Wishlist Page */
+.WishList-container {
+  @include container-styles;
+  
+  .WishList-title {
+    font-size: $font-size-xl;
+    font-weight: bold;
+    margin-bottom: $spacing-m;
+    color: $color-orange;
+    text-align: center;
+    
+    @media (max-width: 900px) {
+      font-size: $font-size-m;
+    }
+    
+    @media (max-width: 600px) {
+      font-size: $font-size-mobile-title;
+    }
+  }
+  
+  .WishList-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: $spacing-xl;
+    list-style: none;
+    padding: 0;
+    margin: $spacing-xl 0 0 0;
+    
+    @media (max-width: 900px) {
+      gap: $spacing-s;
+    }
+  }
+  
+  .WishList-card {
+    @include card-styles;
+    padding: $spacing-s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    
+    @media (max-width: 900px) {
+      padding: $spacing-tablet-s;
+    }
+    
+    @media (max-width: 600px) {
+      padding: $spacing-xs;
+    }
+  }
+  
+  .WishList-empty {
+    color: $color-inactive;
+    text-align: center;
+    margin-top: $spacing-xl;
+  }
+}
